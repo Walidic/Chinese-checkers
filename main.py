@@ -3,7 +3,7 @@ from Game.constants import *
 from Game.board import *
 from Game.piece import *
 from Game.engine import *
-
+from minimax.algorithm import minimax
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -24,6 +24,10 @@ def main():
 
     while run:
         clock.tick(FPS)
+        if game.turn == PIECE_GREEN:
+            value,new_board = minimax(game.board,3,PIECE_GREEN,game) # the higher the depth the better the ai , change the depth to change the difficulty
+            game.ai_move(new_board)
+
         if game.winner() != None:
             print(game.winner())
         for event in pygame.event.get():
