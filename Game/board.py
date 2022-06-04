@@ -1,3 +1,4 @@
+from cmath import pi
 import pygame
 
 from .constants import *
@@ -721,7 +722,8 @@ class Board:
         piece.move(row, col)
 
     def get_piece(self, row, col):
-
+        if row>15 or col>24:
+            return None
         return self.board[row][col]
 
     def get_valid_moves(self, piece):
@@ -930,26 +932,79 @@ class Board:
 
         return jumps
 
-def get_all_pieces(self,color):
-    pieces = []
-    for row in self.board:
-        for piece in row:
-            if piece !=0 and piece.color == color :
-                pieces.append(piece)
-    return pieces
+    def get_all_pieces(self,color):
+        pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece !=0 :
+                    if piece != 1:
+                        if piece != -1:
+                            if piece.color == color:
+                                pieces.append(piece)
+        return pieces
 
-def get_board(self):
-    return self.board
+    def get_board(self):
+        return self.board
 
-def ai_move(self,board):
-    self.board = board
-    self.change_turn()
 
-def evaluate(self):
-     score = 0
-     for row in self.board:
-        for piece in row:
+
+    def evaluate(self):
+        score = 0
+        for row in self.board:
+            for piece in row:
+                if piece == 0 or 1 or -1:
+                    return 0
                 if piece.color == PIECE_GREEN:
                     score = score + piece.row
                 else:
                     score = score - (16 -piece.row) # 16 is the top of the blue triangle
+        return score
+
+    def winner(self):
+            if self.checkBlue():
+                return PIECE_BLUE
+            elif self.checkGreen():
+                return PIECE_GREEN
+            return None
+
+    def checkBlue(self):
+        nodes = [
+            (0, 12),
+            (1, 11),
+            (1, 13),
+            (2, 10),
+            (2, 12),
+            (2, 14),
+            (3, 9),
+            (3, 11),
+            (3, 13),
+            (3, 15),
+        ]
+        for node in nodes:
+            piece = Piece(node[0], node[1], PIECE_BLUE)
+            if self.get_piece(node[0], node[1]) == piece:
+                pass
+            else:
+                return False
+        return True
+
+    def checkGreen(self):
+        nodes = [
+            (16, 12),
+            (15, 11),
+            (15, 13),
+            (14, 10),
+            (14, 12),
+            (14, 14),
+            (13, 9),
+            (13, 11),
+            (13, 13),
+            (13, 15),
+        ]
+        for node in nodes:
+            piece = Piece(node[0], node[1], PIECE_GREEN)
+            if self.get_piece(node[0], node[1]) == piece:
+                pass
+            else:
+                return False
+        return True

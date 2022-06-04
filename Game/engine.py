@@ -119,3 +119,6 @@ class engine:
             self.turn = PIECE_GREEN
         else:
             self.turn = PIECE_BLUE
+
+    def ai_move(self):
+        self.change_turn()

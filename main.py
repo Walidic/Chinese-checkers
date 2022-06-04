@@ -26,7 +26,7 @@ def main():
         clock.tick(FPS)
         if game.turn == PIECE_GREEN:
             value,new_board = minimax(game.board,3,PIECE_GREEN,game) # the higher the depth the better the ai , change the depth to change the difficulty
-            game.ai_move(new_board)
+            game.ai_move()
 
         if game.winner() != None:
             print(game.winner())
