@@ -535,3 +535,27 @@ class Board:
                 coords = (bottomRight[0] + 1, bottomRight[1] + 1)
                 jumps.append(coords)
         return jumps
+
+def get_all_pieces(self,color):
+    pieces = []
+    for row in self.board:
+        for piece in row:
+            if piece !=0 and piece.color == color :
+                pieces.append(piece)
+    return pieces
+
+def get_board(self):
+    return self.board
+
+def ai_move(self,board):
+    self.board = board
+    self.change_turn()
+
+def evaluate(self):
+     score = 0
+     for row in self.board:
+        for piece in row:
+                if piece.color == PIECE_GREEN:
+                    score = score + piece.row
+                else:
+                    score = score - (16 -piece.row) # 16 is the top of the blue triangle

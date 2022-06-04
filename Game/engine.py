@@ -50,7 +50,6 @@ class engine:
         return True
 
     def draw_valid_moves(self, moves):
-        print(moves)
         for move in moves:
             if len(move) != 0:
                 row = move[0][0]
