@@ -49,6 +49,33 @@ class engine:
 
         return True
 
+    def winner(self):
+        if self.checkBlue():
+            return PIECE_BLUE
+        elif self.checkGreen():
+            return PIECE_GREEN
+        return None
+
+    def checkBlue(self):
+        nodes = [(0,12),(1,11),(1,13),(2,10),(2,12),(2,14),(3,9),(3,11),(3,13),(3,15)]
+        for node in nodes:
+            piece = Piece(node[0], node[1], PIECE_BLUE)
+            if self.board.get_piece(node[0],node[1]) == piece:
+                pass:
+            else:
+                return False
+        return true
+
+    def checkGreen(self):
+        nodes = [(16,12),(15,11),(15,13),(14,10),(14,12),(14,14),(13,9),(13,11),(13,13),(13,15)]
+        for node in nodes:
+            peice = Piece(node[0], node[1], PIECE_GREEN)
+            if self.board.get_piece(node[0],node[1]) == piece:
+                pass:
+            else:
+                return false
+        return true
+
     def draw_valid_moves(self, moves):
         for move in moves:
             if len(move) != 0:
